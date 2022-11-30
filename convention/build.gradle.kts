@@ -79,14 +79,14 @@ catalog {
 publishing {
     publications {
         create<MavenPublication>("Catalog") {
-            groupId = "com.github.superbigjian.buildlogic"
+            groupId = "io.github.superbigjian.buildlogic"
             artifactId = "catalog"
             version = "1.0.0"
             from(components["versionCatalog"])
         }
 
         create<MavenPublication>("Convention") {
-            groupId = "com.github.superbigjian.buildlogic"
+            groupId = "io.github.superbigjian.buildlogic"
             artifactId = "convention"
             version = "1.0.0"
             from(components["kotlin"])
