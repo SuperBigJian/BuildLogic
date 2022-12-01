@@ -1,6 +1,6 @@
 val POM_GROUP_ID = "io.github.superbigjian.plugin"
 val POM_ARTIFACT_ID = "version-catalog"
-val POM_VERSION_NAME = "1.0.4"
+val POM_VERSION_NAME = "1.0.5"
 val POM_NAME = "VersionCatalog"
 val POM_DESCRIPTION = "version catalog"
 val POM_COMPONENT = "versionCatalog"
@@ -36,8 +36,8 @@ java {
 }
 
 dependencies {
-    implementation(libs.android.gradlePlugin)
-    implementation(libs.kotlin.gradlePlugin)
+    implementation(libs.androidPlugin)
+    implementation(libs.kotlinPlugin)
 }
 
 publishing {

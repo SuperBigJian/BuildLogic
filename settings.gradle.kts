@@ -15,16 +15,6 @@
  */
 rootProject.name = "BuildLogic"
 
-buildscript {
-    dependencies {
-        classpath("io.github.superbigjian.plugin:maven-publish-tools:+")
-    }
-    repositories {
-        mavenCentral()
-        google()
-    }
-}
-
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 dependencyResolutionManagement {
     repositories {
