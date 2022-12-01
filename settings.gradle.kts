@@ -26,7 +26,6 @@ buildscript {
 }
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
@@ -36,7 +35,8 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("libs") {
-            from("io.github.superbigjian.plugin:version-catalog:+")
+//            from("io.github.superbigjian.plugin:version-catalog:+")
+            from(files("./version-catalog/libs.versions.toml"))
         }
     }
 }
