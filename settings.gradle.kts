@@ -13,17 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+rootProject.name = "BuildLogic"
+
+buildscript {
+    dependencies {
+        classpath("io.github.superbigjian.plugin:maven-publish-tools:1.0.0")
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        google()
+    }
+}
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 dependencyResolutionManagement {
     repositories {
-        maven(url = "https://maven.aliyun.com/nexus/content/groups/public/")
-        maven(url = "https://maven.aliyun.com/repository/public/")
-        maven(url = "https://maven.aliyun.com/repository/central")
-        maven(url = "https://maven.aliyun.com/repository/google")
-        maven(url = "https://maven.aliyun.com/repository/gradle-plugin")
-
+//        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
         google()
@@ -31,9 +38,11 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("libs") {
-            from(files("./libs.versions.toml"))
+            from("io.github.superbigjian.plugin:version-catalog:1.0.0")
         }
     }
 }
 
 include(":convention")
+include(":maven-publish-plugin")
+include(":version-catalog")

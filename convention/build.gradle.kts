@@ -16,20 +16,14 @@
 
 plugins {
     `kotlin-dsl`
-    id("version-catalog")
-    id("maven-publish")
+    id("publish.maven")
 }
 
-group = "com.cyaan.convention.buildlogic"
+group = "io.github.superbigjian.plugin.buildlogic"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-dependencies {
-    implementation(libs.android.gradlePlugin)
-    implementation(libs.kotlin.gradlePlugin)
 }
 
 gradlePlugin {
@@ -46,21 +40,25 @@ gradlePlugin {
             id = "convention.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
-        register("androidRoom") {
-            id = "convention.android.room"
-            implementationClass = "AndroidRoomConventionPlugin"
+        register("androidLibrary") {
+            id = "convention.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
+        register("mavenPublish") {
+            id = "convention.android.maven.publish"
+            implementationClass = "AndroidMavenPublishConventionPlugin"
+        }
+        register("androidModule") {
+            id = "convention.android.module"
+            implementationClass = "AndroidModuleConventionPlugin"
         }
         register("androidPermissions") {
             id = "convention.android.permissions"
             implementationClass = "AndroidPermissionsConventionPlugin"
         }
-        register("androidLibrary") {
-            id = "convention.android.library"
-            implementationClass = "AndroidLibraryConventionPlugin"
-        }
-        register("androidModule") {
-            id = "convention.android.module"
-            implementationClass = "AndroidModuleConventionPlugin"
+        register("androidRoom") {
+            id = "convention.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
         }
         register("androidTest") {
             id = "convention.android.test"
@@ -69,29 +67,7 @@ gradlePlugin {
     }
 }
 
-catalog {
-    // declare the aliases, bundles and versions in this block
-    versionCatalog {
-        from(files("../libs.versions.toml"))
-    }
+dependencies {
+    implementation(libs.android.gradlePlugin)
+    implementation(libs.kotlin.gradlePlugin)
 }
-
-publishing {
-    publications {
-        create<MavenPublication>("Catalog") {
-            groupId = "io.github.superbigjian.buildlogic"
-            artifactId = "catalog"
-            version = "1.0.0"
-            from(components["versionCatalog"])
-        }
-
-        create<MavenPublication>("Convention") {
-            groupId = "io.github.superbigjian.buildlogic"
-            artifactId = "convention"
-            version = "1.0.0"
-            from(components["kotlin"])
-        }
-    }
-}
-
-
