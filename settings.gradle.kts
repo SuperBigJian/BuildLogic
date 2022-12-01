@@ -25,8 +25,8 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("libs") {
-//            from("io.github.superbigjian.plugin:version-catalog:+")
-            from(files("./version-catalog/libs.versions.toml"))
+            from("io.github.superbigjian.plugin:version-catalog:+")
+//            from(files("./version-catalog/libs.versions.toml"))
         }
     }
 }
