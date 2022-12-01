@@ -20,7 +20,6 @@ buildscript {
         classpath("io.github.superbigjian.plugin:maven-publish-tools:+")
     }
     repositories {
-        mavenLocal()
         mavenCentral()
         google()
     }
