@@ -4,13 +4,12 @@ import com.android.build.api.AndroidPluginVersion
 import com.android.build.api.variant.AndroidComponentsExtension
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.plugins.signing.SigningExtension
 
 internal fun Project.findOptionalProperty(propertyName: String) = findProperty(propertyName)?.toString()
 
 internal val Project.versionIsSnapshot: Boolean
-    get() = version.toString().endsWith("-SNAPSHOT")
+    get() = version.toString().endsWith("SNAPSHOT", true)
 
 internal inline val Project.gradleSigning: SigningExtension
     get() = extensions.getByType(SigningExtension::class.java)

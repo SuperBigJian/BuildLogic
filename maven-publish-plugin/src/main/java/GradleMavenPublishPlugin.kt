@@ -32,11 +32,15 @@ class GradleMavenPublishPlugin : Plugin<Project> {
             val mArtifactId = findOptionalProperty(POM_ARTIFACT_ID)
             val mName = findOptionalProperty(POM_NAME) ?: ""
             val mDescription = findOptionalProperty(POM_DESCRIPTION)
+            val mComponent = findOptionalProperty(POM_COMPONENT) ?: "kotlin"
+
             val mUserName = findOptionalProperty(OSSRH_USERNAME)
             val mPassword = findOptionalProperty(OSSRH_PASSWORD)
+
             val mAccountID = findOptionalProperty(GITHUB_ID)
             val mAccountName = findOptionalProperty(GITHUB_NAME)
             val mAccountEmail = findOptionalProperty(GITHUB_EMAIL)
+
             val mCodePath = findOptionalProperty(Github_CODE_PATH)
             val mGitBranch = findOptionalProperty(GITHUB_CODE_BRANCH)
 
@@ -52,8 +56,7 @@ class GradleMavenPublishPlugin : Plugin<Project> {
                     groupId = mGroupId
                     artifactId = mArtifactId
                     version = version
-                    from(components.getByName("kotlin"))
-
+                    from(components.getByName(mComponent))
                     // Self-explanatory metadata for the most part
                     pom {
                         name.set(mName)
@@ -94,7 +97,7 @@ class GradleMavenPublishPlugin : Plugin<Project> {
                     // any other name that's descriptive for you
                     name = mName
 
-                    val releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                    val releasesRepoUrl = "https://s01.oss.sonatype.org/content/repositories/releases/"
                     val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                     // You only need this if you want to publish snapshots, otherwise just set the URL
                     // to the release repo directly
@@ -118,6 +121,7 @@ class GradleMavenPublishPlugin : Plugin<Project> {
         const val POM_VERSION_NAME = "POM_VERSION_NAME"
         const val POM_NAME = "POM_NAME"
         const val POM_DESCRIPTION = "POM_DESCRIPTION"
+        const val POM_COMPONENT = "POM_COMPONENT"
 
         const val OSSRH_USERNAME = "OSSRH_USERNAME"
         const val OSSRH_PASSWORD = "OSSRH_PASSWORD"

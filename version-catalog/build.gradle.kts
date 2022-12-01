@@ -1,17 +1,18 @@
 val POM_GROUP_ID = "io.github.superbigjian.plugin"
 val POM_ARTIFACT_ID = "version-catalog"
-val POM_VERSION_NAME = "1.0.1"
+val POM_VERSION_NAME = "1.0.3"
 val POM_NAME = "VersionCatalog"
 val POM_DESCRIPTION = "version catalog"
+val POM_COMPONENT = "versionCatalog"
 
-val OSSRH_USERNAME = "Cyaan"
-val OSSRH_PASSWORD = "Fatezero123!"
+val OSSRH_USERNAME = findProperty("OSSRH_USERNAME").toString()
+val OSSRH_PASSWORD = findProperty("OSSRH_PASSWORD").toString()
 
-val GITHUB_ID = "SuperBigJian"
-val GITHUB_NAME = "Cyann"
-val GITHUB_EMAIL = "cyaanchen@gmail.com"
-val Github_CODE_PATH = "SuperBigJian/BuildLogic"
-val GITHUB_CODE_BRANCH = "master"
+val GITHUB_ID = findProperty("GITHUB_ID").toString()
+val GITHUB_NAME = findProperty("GITHUB_NAME").toString()
+val GITHUB_EMAIL = findProperty("GITHUB_EMAIL").toString()
+val Github_CODE_PATH = findProperty("Github_CODE_PATH").toString()
+val GITHUB_CODE_BRANCH = findProperty("GITHUB_CODE_BRANCH").toString()
 
 group = "io.github.superbigjian.plugin"
 
@@ -47,7 +48,7 @@ publishing {
             groupId = POM_GROUP_ID
             artifactId = POM_ARTIFACT_ID
             version = POM_VERSION_NAME
-            from(components["versionCatalog"])
+            from(components[POM_COMPONENT])
 
             // Self-explanatory metadata for the most part
             pom {
@@ -94,7 +95,7 @@ publishing {
             val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             // You only need this if you want to publish snapshots, otherwise just set the URL
             // to the release repo directly
-            setUrl(if (POM_VERSION_NAME.endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+            setUrl(if (POM_VERSION_NAME.endsWith("SNAPSHOT", true)) snapshotsRepoUrl else releasesRepoUrl)
             // The username and password we've fetched earlier
             credentials {
                 username = OSSRH_USERNAME

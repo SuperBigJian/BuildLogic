@@ -17,7 +17,7 @@ rootProject.name = "BuildLogic"
 
 buildscript {
     dependencies {
-        classpath("io.github.superbigjian.plugin:maven-publish-tools:1.0.0")
+        classpath("io.github.superbigjian.plugin:maven-publish-tools:+")
     }
     repositories {
         mavenLocal()
@@ -30,7 +30,6 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 dependencyResolutionManagement {
     repositories {
-//        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
         google()
@@ -38,7 +37,7 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("libs") {
-            from("io.github.superbigjian.plugin:version-catalog:1.0.0")
+            from("io.github.superbigjian.plugin:version-catalog:+")
         }
     }
 }
