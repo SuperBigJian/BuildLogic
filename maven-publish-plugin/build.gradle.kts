@@ -1,6 +1,6 @@
 val POM_GROUP_ID = "io.github.superbigjian.plugin"
 val POM_ARTIFACT_ID = "maven-publish-tools"
-val POM_VERSION_NAME = "1.0.5"
+val POM_VERSION_NAME = "1.0.6"
 val POM_NAME = "PublishTools"
 val POM_DESCRIPTION = "Gradle Maven Publish Plugin"
 val POM_COMPONENT = "java"

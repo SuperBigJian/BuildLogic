@@ -17,7 +17,6 @@ internal inline val Project.gradleSigning: SigningExtension
 internal inline val Project.gradlePublishing: PublishingExtension
     get() = extensions.getByType(PublishingExtension::class.java)
 
-
 internal inline val Project.androidComponents: AndroidComponentsExtension<*, *, *>
     get() = extensions.getByType(AndroidComponentsExtension::class.java)
 

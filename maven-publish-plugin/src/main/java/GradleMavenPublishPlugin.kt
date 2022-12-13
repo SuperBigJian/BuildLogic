@@ -14,6 +14,7 @@
  *   limitations under the License.
  */
 
+import com.android.build.api.dsl.LibraryExtension
 import io.github.superbigjian.plugin.publish.findOptionalProperty
 import io.github.superbigjian.plugin.publish.gradlePublishing
 import io.github.superbigjian.plugin.publish.gradleSigning
@@ -22,12 +23,14 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.create
+import org.jetbrains.kotlin.gradle.utils.loadPropertyFromResources
 
 class GradleMavenPublishPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
-            version = findOptionalProperty(POM_VERSION_NAME) ?: ""
+            val mVersion = findOptionalProperty(POM_VERSION_NAME) ?: ""
+            version = mVersion
             val mGroupId = findOptionalProperty(POM_GROUP_ID)
             val mArtifactId = findOptionalProperty(POM_ARTIFACT_ID)
             val mName = findOptionalProperty(POM_NAME) ?: ""
@@ -44,9 +47,18 @@ class GradleMavenPublishPlugin : Plugin<Project> {
             val mCodePath = findOptionalProperty(Github_CODE_PATH)
             val mGitBranch = findOptionalProperty(GITHUB_CODE_BRANCH)
 
+            val mVariant = "release"
+
             with(pluginManager) {
                 apply("maven-publish")
                 apply("signing")
+            }
+
+            plugins.withId("com.android.library"){
+                val library = target.extensions.findByType(LibraryExtension::class.java)
+                library?.publishing {
+                    singleVariant(mVariant)
+                }
             }
 
             gradlePublishing.publications {
@@ -55,8 +67,22 @@ class GradleMavenPublishPlugin : Plugin<Project> {
                     // we"ll set up in a moment
                     groupId = mGroupId
                     artifactId = mArtifactId
-                    version = version
-                    from(components.getByName(mComponent))
+                    version = mVersion
+                    when (mComponent) {
+                        "java", "kotlin" -> {
+                            from(components.getByName(mComponent))
+                        }
+                        "android" -> {
+                            target.afterEvaluate {
+                                val component = components.findByName(mVariant) ?: throw NoSuchFieldException(mVariant)
+                                gradlePublishing.publications {
+                                    findByName(mName).apply {
+                                        (this as MavenPublication).from(component)
+                                    }
+                                }
+                            }
+                        }
+                    }
                     // Self-explanatory metadata for the most part
                     pom {
                         name.set(mName)
