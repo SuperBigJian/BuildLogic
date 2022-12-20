@@ -18,6 +18,7 @@ rootProject.name = "BuildLogic"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 dependencyResolutionManagement {
     repositories {
+        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
         google()
@@ -25,8 +26,8 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("libs") {
-            from("io.github.superbigjian.plugin:version-catalog:1.0.5")
-//            from(files("./version-catalog/libs.versions.toml"))
+//            from("io.github.superbigjian.plugin:version-catalog:+")
+            from(files("./version-catalog/libs.versions.toml"))
         }
     }
 }

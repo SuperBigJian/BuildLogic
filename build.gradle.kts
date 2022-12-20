@@ -3,6 +3,7 @@ buildscript {
         classpath(libs.superbigjian.publishPlugin)
     }
     repositories {
+        mavenLocal()
         mavenCentral()
         google()
     }

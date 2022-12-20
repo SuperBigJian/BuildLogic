@@ -53,14 +53,8 @@ class GradleMavenPublishPlugin : Plugin<Project> {
                 apply("signing")
             }
 
-            plugins.withId("com.android.library") {
-                val library = target.extensions.findByType(LibraryExtension::class.java)
-                library?.publishing {
-                    singleVariant(mVariant)
-                }
-            }
-
             gradlePublishing.publications {
+
                 create<MavenPublication>(mName) {
                     // The coordinates of the library, being set from variables that
                     // we"ll set up in a moment
@@ -72,6 +66,13 @@ class GradleMavenPublishPlugin : Plugin<Project> {
                             from(components.getByName(mComponent))
                         }
                         "android" -> {
+                            val library = project.extensions.findByType(LibraryExtension::class.java)!!
+                            library.publishing {
+                                singleVariant(mVariant) {
+                                    withSourcesJar()
+                                }
+                            }
+
                             target.afterEvaluate {
                                 val component = components.findByName(mVariant) ?: throw NoSuchFieldException(mVariant)
                                 gradlePublishing.publications {

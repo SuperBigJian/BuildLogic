@@ -1,6 +1,6 @@
 val POM_GROUP_ID = "io.github.superbigjian.plugin"
 val POM_ARTIFACT_ID = "maven-publish-tools"
-val POM_VERSION_NAME = "1.0.7"
+val POM_VERSION_NAME = "1.0.8"
 val POM_NAME = "PublishTools"
 val POM_DESCRIPTION = "Gradle Maven Publish Plugin"
 val POM_COMPONENT = "java"
@@ -18,6 +18,7 @@ group = "io.github.superbigjian.plugin"
 
 plugins {
     `kotlin-dsl`
+    id("java-gradle-plugin")
     id("maven-publish")
     id("signing")
 }
@@ -37,6 +38,8 @@ java {
 }
 
 dependencies {
+    implementation(gradleApi())
+    implementation(libs.kotlin.stdlib)
     implementation(libs.androidPlugin)
     implementation(libs.kotlinPlugin)
 }
