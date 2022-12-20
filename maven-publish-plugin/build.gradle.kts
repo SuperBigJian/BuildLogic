@@ -1,18 +1,18 @@
 val POM_GROUP_ID = "io.github.superbigjian.plugin"
 val POM_ARTIFACT_ID = "maven-publish-tools"
-val POM_VERSION_NAME = "1.0.6"
+val POM_VERSION_NAME = "1.0.7"
 val POM_NAME = "PublishTools"
 val POM_DESCRIPTION = "Gradle Maven Publish Plugin"
 val POM_COMPONENT = "java"
 
+val GITHUB_ID = "SuperBigJian"
+val GITHUB_NAME = "Cyann"
+val GITHUB_EMAIL = "cyaanchen@gmail.com"
+val Github_CODE_PATH = "SuperBigJian/BuildLogic/maven-publish-plugin"
+val GITHUB_CODE_BRANCH = "master"
+
 val OSSRH_USERNAME = findProperty("OSSRH_USERNAME").toString()
 val OSSRH_PASSWORD = findProperty("OSSRH_PASSWORD").toString()
-
-val GITHUB_ID = findProperty("GITHUB_ID").toString()
-val GITHUB_NAME = findProperty("GITHUB_NAME").toString()
-val GITHUB_EMAIL = findProperty("GITHUB_EMAIL").toString()
-val Github_CODE_PATH = findProperty("Github_CODE_PATH").toString()
-val GITHUB_CODE_BRANCH = findProperty("GITHUB_CODE_BRANCH").toString()
 
 group = "io.github.superbigjian.plugin"
 

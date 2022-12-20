@@ -23,7 +23,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.create
-import org.jetbrains.kotlin.gradle.utils.loadPropertyFromResources
 
 class GradleMavenPublishPlugin : Plugin<Project> {
 
@@ -54,7 +53,7 @@ class GradleMavenPublishPlugin : Plugin<Project> {
                 apply("signing")
             }
 
-            plugins.withId("com.android.library"){
+            plugins.withId("com.android.library") {
                 val library = target.extensions.findByType(LibraryExtension::class.java)
                 library?.publishing {
                     singleVariant(mVariant)

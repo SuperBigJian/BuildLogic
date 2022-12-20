@@ -1,4 +1,3 @@
-
 buildscript {
     dependencies {
         classpath(libs.superbigjian.publishPlugin)

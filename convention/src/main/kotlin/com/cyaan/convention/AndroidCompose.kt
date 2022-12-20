@@ -39,7 +39,7 @@ internal fun Project.configureAndroidCompose(
             kotlinCompilerExtensionVersion = libs.findVersion("androidxCompose").get().toString()
         }
 
-       dependencies {
+        dependencies {
             add("implementation", libs.findBundle("composeLibs").get())
         }
     }

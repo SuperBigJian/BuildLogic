@@ -2,3 +2,5 @@
 /convention/build/
 /.idea/
 /.gradle/
+/gradle.properties
+/local.properties

@@ -66,8 +66,8 @@ junit-ktx = "androidx.test.ext:junit-ktx:1.1.3"
 rules = "androidx.test:rules:1.4.0"
 espresso-core = "androidx.test.espresso:espresso-core:3.4.0"
 
-superbigjian-publishPlugin = { group = "io.github.superbigjian.plugin", name = "maven-publish-tools", version = "1.0.6" }
-superbigjian-convention = { group = "io.github.superbigjian.plugin", name = "convention", version = "1.0.6" }
+superbigjian-publishPlugin = { group = "io.github.superbigjian.plugin", name = "maven-publish-tools", version = "1.0.7" }
+superbigjian-convention = { group = "io.github.superbigjian.plugin", name = "convention", version = "1.0.7" }
 
 # classpath of plugin
 androidPlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
