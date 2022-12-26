@@ -70,8 +70,12 @@ junit-ktx = "androidx.test.ext:junit-ktx:1.1.3"
 rules = "androidx.test:rules:1.4.0"
 espresso-core = "androidx.test.espresso:espresso-core:3.4.0"
 
-superbigjian-publishPlugin = { group = "io.github.superbigjian.plugin", name = "maven-publish-tools", version = "1.0.8" }
+superbigjian-publishPlugin = { group = "io.github.superbigjian.plugin", name = "maven-publish-tools", version = "1.0.9" }
 superbigjian-convention = { group = "io.github.superbigjian.plugin", name = "convention", version = "1.0.8" }
+superbigjian-breakpad = { group = "io.github.superbigjian.libs", name = "breakpad", version = "1.0.1" }
+superbigjian-common = { group = "io.github.superbigjian.base", name = "common", version = "1.0.1" }
+superbigjian-commonUI = { group = "io.github.superbigjian.base", name = "common-ui", version = "1.0.1" }
+
 
 # classpath of plugin
 androidPlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }

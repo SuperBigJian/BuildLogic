@@ -9,7 +9,10 @@ import org.gradle.plugins.signing.SigningExtension
 internal fun Project.findOptionalProperty(propertyName: String) = findProperty(propertyName)?.toString()
 
 internal val Project.versionIsSnapshot: Boolean
-    get() = version.toString().endsWith("SNAPSHOT", true)
+    get() {
+        if (version.toString().endsWith("snapshot")) throw Exception("test version name must end with SNAPSHOT")
+        return version.toString().endsWith("SNAPSHOT")
+    }
 
 internal inline val Project.gradleSigning: SigningExtension
     get() = extensions.getByType(SigningExtension::class.java)

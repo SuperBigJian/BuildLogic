@@ -14,13 +14,11 @@
  *   limitations under the License.
  */
 
-import com.android.build.api.dsl.LibraryExtension
-import io.github.superbigjian.plugin.publish.findOptionalProperty
-import io.github.superbigjian.plugin.publish.gradlePublishing
-import io.github.superbigjian.plugin.publish.gradleSigning
-import io.github.superbigjian.plugin.publish.versionIsSnapshot
+import com.android.build.api.variant.Variant
+import io.github.superbigjian.plugin.publish.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.create
 
@@ -46,8 +44,6 @@ class GradleMavenPublishPlugin : Plugin<Project> {
             val mCodePath = findOptionalProperty(Github_CODE_PATH)
             val mGitBranch = findOptionalProperty(GITHUB_CODE_BRANCH)
 
-            val mVariant = "release"
-
             with(pluginManager) {
                 apply("maven-publish")
                 apply("signing")
@@ -66,19 +62,9 @@ class GradleMavenPublishPlugin : Plugin<Project> {
                             from(components.getByName(mComponent))
                         }
                         "android" -> {
-                            val library = project.extensions.findByType(LibraryExtension::class.java)!!
-                            library.publishing {
-                                singleVariant(mVariant) {
-                                    withSourcesJar()
-                                }
-                            }
-
-                            target.afterEvaluate {
-                                val component = components.findByName(mVariant) ?: throw NoSuchFieldException(mVariant)
-                                gradlePublishing.publications {
-                                    findByName(mName).apply {
-                                        (this as MavenPublication).from(component)
-                                    }
+                            androidComponents.onVariants {
+                                if ("release" == it.buildType) {
+                                    artifact(getReleaseOutput(target, it))
                                 }
                             }
                         }
@@ -140,6 +126,28 @@ class GradleMavenPublishPlugin : Plugin<Project> {
         }
     }
 
+
+    private fun getReleaseOutput(project: Project, variant: Variant?): String {
+        return findBundle(project, variant)?.name
+            ?: if (variant == null) {
+                "${project.buildDir}/libs/${project.name}.jar"
+            } else {
+                if (variant.flavorName.isNullOrBlank()) {
+                    "${project.buildDir}/outputs/aar/${project.name}-release.aar"
+                } else {
+                    "${project.buildDir}/outputs/aar/${project.name}-${variant.flavorName}-release.aar"
+                }
+            }
+    }
+
+    private fun findBundle(project: Project, variant: Variant?): Task? {
+        return if (variant == null) {
+            project.tasks.findByName("jar")
+        } else {
+            project.tasks.findByName("bundle${variant.flavorName?.capitalize()}Release")
+                ?: project.tasks.findByName("bundle${variant.flavorName?.capitalize()}ReleaseAar")
+        }
+    }
 
     companion object {
         const val POM_GROUP_ID = "POM_GROUP_ID"
